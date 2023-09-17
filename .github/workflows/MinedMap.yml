@@ -8,13 +8,15 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+        uses: 'actions/checkout@v4'
+        with:
+          fetch-depth: 0
 
       - name: 'Get version'
         id: 'tag'
         run: |
           set -o pipefail
-          git fetch --prune --unshallow --tags -f
+          #git fetch --prune --unshallow --tags -f
           echo "tag=$(git describe --abbrev=7 --match='v*' | sed 's/^v//')" >> $GITHUB_OUTPUT
 
       - name: 'Install'
